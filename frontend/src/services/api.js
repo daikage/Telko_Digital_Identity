@@ -18,6 +18,12 @@ export const apiFetch = async (endpoint, options = {}) => {
     headers,
   });
 
+  if (response.status === 401) {
+    localStorage.removeItem('auth_token');
+    window.location.href = '/login';
+    throw new Error('Unauthenticated');
+  }
+
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
     throw new Error(errorData.message || 'API Error');
@@ -26,6 +32,9 @@ export const apiFetch = async (endpoint, options = {}) => {
   return response.json();
 };
 
-export const getAdminDashboard = async () => {
-  return apiFetch('/admin/dashboard');
-};
+export const login = (data) => apiFetch('/auth/login', { method: 'POST', body: JSON.stringify(data) });
+export const register = (data) => apiFetch('/auth/register', { method: 'POST', body: JSON.stringify(data) });
+export const logout = () => apiFetch('/auth/logout', { method: 'POST' });
+export const getMyProfile = () => apiFetch('/my-profile');
+export const updateProfile = (data) => apiFetch('/profile/update', { method: 'PUT', body: JSON.stringify(data) });
+export const getAdminDashboard = () => apiFetch('/admin/dashboard');

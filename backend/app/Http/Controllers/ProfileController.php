@@ -58,6 +58,12 @@ class ProfileController extends Controller
             'headline' => 'nullable|string|max:255',
             'bio' => 'nullable|string',
             'linkedin' => 'nullable|string|max:255',
+            'avatar_url' => 'nullable|string|url',
+            'theme_color' => 'nullable|string',
+            'contact_email' => 'nullable|email',
+            'contact_phone' => 'nullable|string',
+            'skills' => 'nullable|array',
+            'projects' => 'nullable|array',
             'experiences' => 'nullable|array',
             'social_links' => 'nullable|array',
         ]);
@@ -68,7 +74,11 @@ class ProfileController extends Controller
         try {
             $profile = Profile::updateOrCreate(
                 ['user_id' => $user->id],
-                $request->only(['headline', 'bio', 'linkedin'])
+                $request->only([
+                    'headline', 'bio', 'linkedin', 
+                    'avatar_url', 'theme_color', 'contact_email', 
+                    'contact_phone', 'skills', 'projects'
+                ])
             );
 
             if ($request->has('experiences')) {

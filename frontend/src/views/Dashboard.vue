@@ -5,7 +5,7 @@
       <!-- Header -->
       <header class="flex justify-between items-center py-4 border-b border-gray-200 dark:border-gray-800">
         <router-link to="/dashboard" class="flex items-center gap-2">
-          <img src="https://i.ibb.co/bjF2sM35/Telko-logo-Update-1-jpg-1.png" alt="Telko Logo" class="h-11 object-contain" />
+          <img src="https://i.ibb.co/5xKQcxPm/Telko-logo-Update-1-jpg-1.png" alt="Telko Logo" class="h-16 object-contain" />
         </router-link>
         <button @click="logout" class="px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:text-red-500 transition-colors">
           Logout
@@ -36,6 +36,9 @@
             </router-link>
             <router-link v-if="user?.username" :to="`/@${user.username}`" class="flex-1 md:flex-none text-center px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium shadow-lg hover:shadow-blue-500/30 transition-all">
               View Public
+            </router-link>
+            <router-link v-if="user?.is_admin" to="/admin/users" class="flex-1 md:flex-none text-center px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-medium shadow-lg hover:shadow-purple-500/30 transition-all">
+              Admin Panel
             </router-link>
           </div>
         </section>
@@ -81,7 +84,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import { apiFetch } from '../services/api';
+import { apiFetch, getMyProfile, logout as apiLogout } from '../services/api';
 import QrcodeVue from 'qrcode.vue';
 
 const router = useRouter();
@@ -97,7 +100,7 @@ const profileUrl = computed(() => {
 
 onMounted(async () => {
   try {
-    const profileRes = await apiFetch('/my-profile');
+    const profileRes = await getMyProfile();
     user.value = profileRes.user;
     profile.value = profileRes.profile;
     
@@ -113,9 +116,15 @@ onMounted(async () => {
   }
 });
 
-const logout = () => {
-  localStorage.removeItem('auth_token');
-  router.push('/');
+const logout = async () => {
+  try {
+    await apiLogout();
+  } catch (err) {
+    console.error('Logout failed on server', err);
+  } finally {
+    localStorage.removeItem('auth_token');
+    router.push('/');
+  }
 };
 
 const shareLink = () => {

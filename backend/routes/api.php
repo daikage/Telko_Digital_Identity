@@ -24,4 +24,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Admin routes
     Route::get('/admin/dashboard', [\App\Http\Controllers\AdminController::class, 'dashboard']);
+    Route::get('/admin/users', [\App\Http\Controllers\AdminController::class, 'users']);
 });

@@ -34,8 +34,24 @@ const router = createRouter({
       path: '/@:username',
       name: 'publicProfile',
       component: () => import('../views/PublicProfile.vue')
+    },
+    {
+      path: '/admin/users',
+      name: 'adminUsers',
+      component: () => import('../views/admin/AdminUsers.vue'),
+      meta: { requiresAuth: true }
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = !!localStorage.getItem('auth_token');
+  
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    next('/login');
+  } else {
+    next();
+  }
+});
 
 export default router

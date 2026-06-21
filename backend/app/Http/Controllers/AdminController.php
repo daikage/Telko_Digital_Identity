@@ -36,4 +36,15 @@ class AdminController extends Controller
             ]
         ]);
     }
+
+    public function users(Request $request)
+    {
+        // Authorization check
+        if (!$request->user() || !$request->user()->is_admin) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
+        $users = User::with('profile')->orderBy('created_at', 'desc')->get();
+        return response()->json($users);
+    }
 }

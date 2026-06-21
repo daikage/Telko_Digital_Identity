@@ -67,6 +67,8 @@ class WebAdminController extends Controller
             ->take(10)
             ->get();
 
-        return view('admin.dashboard', compact('totalUsers', 'totalProfiles', 'activeCards', 'recentSignups', 'recentViews'));
+        $allUsers = User::with('profile')->orderBy('created_at', 'desc')->paginate(50);
+
+        return view('admin.dashboard', compact('totalUsers', 'totalProfiles', 'activeCards', 'recentSignups', 'recentViews', 'allUsers'));
     }
 }
