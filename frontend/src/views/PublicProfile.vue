@@ -95,7 +95,7 @@
           <p class="text-gray-500 text-xs mt-2 font-medium">Scan to view profile</p>
         </div>
         <router-link to="/" class="inline-flex items-center gap-3 text-sm text-gray-400 hover:text-blue-500 transition-colors">
-          <img src="https://i.ibb.co/5xKQcxPm/Telko-logo-Update-1-jpg-1.png" alt="Telko Logo" class="h-14 object-contain" />
+          <img src="https://i.ibb.co/chrxq5jh/Gemini-Generated-Image-k6n1txk6n1txk6n1.png" alt="Telko Logo" class="h-14 object-contain" />
           <span>Create your own</span>
         </router-link>
       </div>

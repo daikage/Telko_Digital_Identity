@@ -4,7 +4,7 @@
       <div class="p-8">
         <div class="text-center mb-8">
           <div class="flex justify-center mb-6">
-          <img src="https://i.ibb.co/5xKQcxPm/Telko-logo-Update-1-jpg-1.png" alt="Telko Logo" class="h-28 object-contain" />
+          <img src="https://i.ibb.co/chrxq5jh/Gemini-Generated-Image-k6n1txk6n1txk6n1.png" alt="Telko Logo" class="h-28 object-contain" />
         </div>
         <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">
           Join Telko

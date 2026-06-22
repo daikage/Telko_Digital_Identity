@@ -5,7 +5,7 @@
       <!-- Header -->
       <header class="flex justify-between items-center py-4 border-b border-gray-200 dark:border-gray-800">
         <router-link to="/dashboard" class="flex items-center gap-2">
-          <img src="https://i.ibb.co/5xKQcxPm/Telko-logo-Update-1-jpg-1.png" alt="Telko Logo" class="h-16 object-contain" />
+          <img src="https://i.ibb.co/chrxq5jh/Gemini-Generated-Image-k6n1txk6n1txk6n1.png" alt="Telko Logo" class="h-16 object-contain" />
         </router-link>
         <button @click="logout" class="px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:text-red-500 transition-colors">
           Logout

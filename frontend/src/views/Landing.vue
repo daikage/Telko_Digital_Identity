@@ -2,7 +2,7 @@
   <div class="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white px-4">
     <div class="max-w-3xl w-full text-center space-y-8 animate-fade-in-up">
       <div class="flex justify-center items-center">
-        <img src="https://i.ibb.co/5xKQcxPm/Telko-logo-Update-1-jpg-1.png" alt="Telko Logo" class="h-48 md:h-56 object-contain drop-shadow-2xl" />
+        <img src="https://i.ibb.co/chrxq5jh/Gemini-Generated-Image-k6n1txk6n1txk6n1.png" alt="Telko Logo" class="h-48 md:h-56 object-contain drop-shadow-2xl" />
       </div>
       <p class="text-xl md:text-2xl text-gray-300 font-light">
         One profile. One identity. Share anywhere.
