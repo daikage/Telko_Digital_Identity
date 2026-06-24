@@ -21,7 +21,10 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
+            <div class="flex justify-between items-center mb-1">
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+              <router-link to="/forgot-password" class="text-sm text-blue-600 dark:text-blue-400 font-medium hover:underline">Forgot Password?</router-link>
+            </div>
             <input v-model="form.password" type="password" required class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" placeholder="••••••••">
           </div>
 

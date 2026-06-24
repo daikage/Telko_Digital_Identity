@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Telko Digital Identity</string>
+    <string name="title_activity_main">Telko Digital Identity</string>
+    <string name="package_name">com.telko.identity</string>
+    <string name="custom_url_scheme">com.telko.identity</string>
+</resources>
