@@ -41,6 +41,10 @@ const router = createRouter({
       meta: { requiresAuth: true }
     },
     {
+      path: '/u/:username',
+      redirect: to => `/@${to.params.username}`
+    },
+    {
       path: '/@:username',
       name: 'publicProfile',
       component: () => import('../views/PublicProfile.vue')
@@ -56,9 +60,12 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const isAuthenticated = !!localStorage.getItem('auth_token');
+  const guestRoutes = ['landing', 'login', 'signup', 'forgotPassword', 'resetPassword'];
   
   if (to.meta.requiresAuth && !isAuthenticated) {
     next('/login');
+  } else if (isAuthenticated && guestRoutes.includes(to.name)) {
+    next('/dashboard');
   } else {
     next();
   }

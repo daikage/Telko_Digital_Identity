@@ -1,4 +1,5 @@
 export const API_URL = 'https://telko-digital-identity-backend-main-1drpqn.laravel.cloud/api';
+export const SITE_URL = 'https://telkodigitalidentityfrontend2.vercel.app';
 
 export const apiFetch = async (endpoint, options = {}) => {
   const token = localStorage.getItem('auth_token');

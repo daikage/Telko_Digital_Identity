@@ -91,7 +91,7 @@
       <!-- Footer Branding & QR -->
       <div class="mt-16 text-center pt-8 border-t border-gray-100 dark:border-gray-800 flex flex-col items-center">
         <div class="mb-8 p-4 bg-white rounded-2xl shadow-sm inline-block border border-gray-100">
-          <qrcode-vue :value="currentUrl" :size="120" level="H" foreground="#000000" />
+          <qrcode-vue :value="qrUrl" :size="120" level="M" foreground="#000000" />
           <p class="text-gray-500 text-xs mt-2 font-medium">Scan to view profile</p>
         </div>
         <router-link to="/" class="inline-flex items-center gap-3 text-sm text-gray-400 hover:text-blue-500 transition-colors">
@@ -106,7 +106,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import { API_URL } from '../services/api';
+import { API_URL, SITE_URL } from '../services/api';
 import QrcodeVue from 'qrcode.vue';
 
 const route = useRoute();
@@ -115,7 +115,15 @@ const profile = ref({});
 const loading = ref(true);
 const error = ref('');
 
-const currentUrl = computed(() => window.location.href);
+const currentUrl = computed(() => {
+  const username = route.params.username;
+  return `${SITE_URL}/@${username}`;
+});
+
+const qrUrl = computed(() => {
+  const username = route.params.username;
+  return `${SITE_URL}/u/${username}`;
+});
 
 onMounted(async () => {
   const username = route.params.username;
@@ -139,7 +147,7 @@ VERSION:3.0
 N:;${user.value.name || user.value.username};;;
 FN:${user.value.name || user.value.username}
 TITLE:${profile.value.headline || ''}
-URL:${window.location.href}
+URL:${SITE_URL}/@${user.value.username}
 `;
   if (profile.value.contact_email) vcard += `EMAIL:${profile.value.contact_email}\n`;
   if (profile.value.contact_phone) vcard += `TEL:${profile.value.contact_phone}\n`;
@@ -161,14 +169,14 @@ const shareProfile = async () => {
       await navigator.share({
         title: `${user.value.name || user.value.username}'s Digital Profile`,
         text: profile.value.headline || 'Check out my professional profile.',
-        url: window.location.href,
+        url: currentUrl.value,
       });
     } catch (err) {
       console.log('Error sharing', err);
     }
   } else {
     // Fallback
-    navigator.clipboard.writeText(window.location.href);
+    navigator.clipboard.writeText(currentUrl.value);
     alert('Link copied to clipboard!');
   }
 };

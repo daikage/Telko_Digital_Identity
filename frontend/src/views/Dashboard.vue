@@ -72,7 +72,7 @@
             </button>
           </div>
           <div class="p-4 bg-white rounded-2xl flex-shrink-0" v-if="user?.username">
-            <qrcode-vue :value="profileUrl" :size="150" level="H" />
+            <qrcode-vue :value="qrUrl" :size="150" level="M" />
           </div>
         </section>
 
@@ -84,7 +84,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import { apiFetch, getMyProfile, logout as apiLogout } from '../services/api';
+import { apiFetch, getMyProfile, logout as apiLogout, SITE_URL } from '../services/api';
 import QrcodeVue from 'qrcode.vue';
 
 const router = useRouter();
@@ -95,7 +95,12 @@ const loading = ref(true);
 
 const profileUrl = computed(() => {
   if (!user.value?.username) return '';
-  return `${window.location.origin}/@${user.value.username}`;
+  return `${SITE_URL}/@${user.value.username}`;
+});
+
+const qrUrl = computed(() => {
+  if (!user.value?.username) return '';
+  return `${SITE_URL}/u/${user.value.username}`;
 });
 
 onMounted(async () => {
@@ -129,7 +134,7 @@ const logout = async () => {
 
 const shareLink = () => {
   if (user.value?.username) {
-    const url = `${window.location.origin}/@${user.value.username}`;
+    const url = `${SITE_URL}/@${user.value.username}`;
     navigator.clipboard.writeText(url);
     alert('Link copied to clipboard!');
   }
